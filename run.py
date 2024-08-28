@@ -12,12 +12,41 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('barber_brain')
 
-clients = SHEET.worksheet('clients')
+staff_members = SHEET.worksheet('staff')
+staff_members_data = staff_members.get_all_values()
 
-client_data = clients.get_all_values()
+def login():
 
-headers = client_data[0]
-client_data = client_data[1:]
+    while True:
+        print("Barner Brain Staff Login")
+
+        staff_username = input("Username: ").strip()
+        staff_password = input("Password: ").strip()
+
+        for row in staff_members_data[1:]:
+            sheet_username = row[1]
+            sheet_password = row[2]
+
+            if staff_username == sheet_username and staff_password == sheet_password:
+                print("`nLogin successful!")
+                return True
+        
+        print ("\nInvalid username or password.")
+
+def logout():
+    print("\nYou have been logged out.")
+    return False
+
+def main():
+
+    while True:
+        if login():
+            while True:
+                if not navigation_menu():
+                    break
+        else:
+            print("Login failed. Exiting program.")
+            break
 
 def search_client():
     while True:
@@ -61,14 +90,24 @@ def navigation_menu():
         print("\nBarber Brain")
         print("1. Search for an existing client")
         print("2. Add a new client")
+        print("3. Logout")
 
-        choice = input("Enter option (1/2): ").strip()
+        choice = input("Enter option (1/2/3): ").strip()
 
         if choice == '1':
             search_client()
         elif choice == '2':
             add_new_client()
+        elif choice == '3':
+            return logout()
         else:
-            print("Invalid choice. Please enter 1 or 2.")
+            print("Invalid choice. Please enter 1, 2 or 3.")
 
-navigation_menu()
+clients = SHEET.worksheet('clients')
+client_data = clients.get_all_values()
+
+headers = client_data[0]
+client_data = client_data[1:]
+
+if __name__ == "__main__":
+    main()
