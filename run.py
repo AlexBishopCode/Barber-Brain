@@ -15,8 +15,13 @@ SHEET = GSPREAD_CLIENT.open('barber_brain')
 staff_members = SHEET.worksheet('staff')
 staff_members_data = staff_members.get_all_values()
 
-def login():
+clients = SHEET.worksheet('clients')
+client_data = clients.get_all_values()
 
+headers = client_data[0]
+client_data = client_data[1:]
+
+def login():
     while True:
         print("Barner Brain Staff Login")
 
@@ -77,12 +82,17 @@ def search_client():
 def add_new_client():
     new_client = []
     print("Enter the new client's details: ")
+
+    new_client_id = len(client_data) +1
     
     for header in headers:
-        new_client.append(input(f"{header}: "))
+        if header.lower() != 'client id':
+            new_client.append(input(f"{header}: "))
+
+    new_client.insert(2, new_client_id)
 
     clients.append_row(new_client)
-    print("New client created successfully.")
+    print("New client created successfully. Clients ID:", new_client_id)
 
 def navigation_menu():
     
@@ -102,12 +112,6 @@ def navigation_menu():
             return logout()
         else:
             print("Invalid choice. Please enter 1, 2 or 3.")
-
-clients = SHEET.worksheet('clients')
-client_data = clients.get_all_values()
-
-headers = client_data[0]
-client_data = client_data[1:]
 
 if __name__ == "__main__":
     main()
