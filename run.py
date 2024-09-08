@@ -36,7 +36,7 @@ def login():
             sheet_password = row[2]
 
             if staff_username == sheet_username and staff_password == sheet_password:
-                print("`nLogin successful!")
+                print("\nLogin successful!")
                 return True
         
         print ("\nInvalid username or password.")
