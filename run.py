@@ -21,6 +21,9 @@ client_data = clients.get_all_values()
 headers = client_data[0]
 client_data = client_data[1:]
 
+visits = SHEET.worksheet('visits')
+visits_data = visits.get_all_values()
+
 def login():
     while True:
         print("Barner Brain Staff Login")
@@ -92,7 +95,46 @@ def add_new_client():
     new_client.insert(2, new_client_id)
 
     clients.append_row(new_client)
-    print("New client created successfully. Clients ID:", new_client_id)
+    print("New client created. Clients ID:", new_client_id)
+
+    visits.append_row([new_client_id, 0, 0])
+    print(f"Added client ID {new_client_id} to visits sheet (0 visits - 0 loyalty points).") 
+
+def log_client_visit():
+    client_id = input("Enter the client's ID to log a visit: ")
+
+    visits_data = visits.get_all_values()
+    client_found = False
+
+    for i, row in enumerate(visits_data[1:], start=2):
+        if row[0] == client_id:
+            current_visits = int(row[1])
+            new_visits = current_visits + 1
+            visits.update_cell(i, 2, new_visits)
+
+            current_points = int(row[2])
+            new_points = current_points + 1
+            visits.update_cell(i, 3, new_points) 
+
+            print(f"Client visits updated to {new_visits}.")
+            print(f"Loyalty points updated to {new_points}.")
+
+            if new_points >= 10:
+                print("The client has earned a free shave!")
+                redeem = input("Would the client like to redeem 10 loyalty points for a free shave? (yes/no): ").strip().lower()
+                if redeem == 'yes':
+                    new_points -= 10
+                    visits.update_cell(i, 3, new_points)
+                    print("*Points redeemed* The client has used 10 loyalty points for a free shave.")
+                else:
+                    print("Loyalty points not redeemed.")
+
+            client_found = True
+            break
+
+    if not client_found:
+        print("Client ID could not be found.")
+
 
 def navigation_menu():
     
@@ -100,18 +142,21 @@ def navigation_menu():
         print("\nBarber Brain")
         print("1. Search for an existing client")
         print("2. Add a new client")
-        print("3. Logout")
+        print("3. Log a client visit") 
+        print("4. Logout")
 
-        choice = input("Enter option (1/2/3): ").strip()
+        choice = input("Enter option (1/2/3/4): ").strip()
 
         if choice == '1':
             search_client()
         elif choice == '2':
             add_new_client()
         elif choice == '3':
+            log_client_visit()
+        elif choice == '4':
             return logout()
         else:
-            print("Invalid choice. Please enter 1, 2 or 3.")
+            print("Invalid choice. Enter option (1/2/3/4).")
 
 if __name__ == "__main__":
     main()
