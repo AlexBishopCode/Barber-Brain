@@ -31,7 +31,7 @@ def is_phone_number_valid(number):
 
 def login():
     while True:
-        print("Barner Brain Staff Login")
+        print("Barber Brain Staff Login")
 
         staff_username = input("Username: ").strip()
         staff_password = input("Password: ").strip()
