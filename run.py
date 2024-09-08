@@ -71,15 +71,37 @@ def search_client():
             break
 
         found = False
-        for index, row in enumerate(client_data):
+        for row in client_data:
             if first_name.lower() == row[0].lower() and second_name.lower() == row[1].lower():
+                client_id = row[2]
                 print("\nDetails found:")
                 for i in range(len(headers)):
                     print(f"{headers[i]}: {row[i]}")
-                found = True
-        
+
+                visits_data = visits.get_all_values()
+                for visit_row in visits_data[1:]:
+                    if visit_row[0] == client_id:
+                        loyalty_points = int(visit_row[2])
+                        print(f"Loyalty Points: {loyalty_points}")
+
+                        if loyalty_points >= 10:
+                            print("This client is eligible for a free shave!")
+                            redeem = input("Would the client like to redeem 10 loyalty points for a free shave? (yes/no): ").strip().lower()
+                            if redeem == 'yes':
+                                new_points = loyalty_points - 10
+                                visits.update_cell(visits_data.index(visit_row) + 1, 3, new_points)
+                                print("*Points redeemed* Client has used 10 loyalty points for a free shave.")
+                            else:
+                                print("Loyalty points not redeemed.")
+                        else:
+                            print("This client is not eligible for a free shave yet.")
+                        
+                        found = True
+                        break
+                break
+
         if not found:
-            print("There are no deatils for that name.")
+            print("No details found for that name.")
             break
 
 def add_new_client():
