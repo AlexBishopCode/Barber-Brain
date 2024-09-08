@@ -91,7 +91,9 @@ def search_client():
 
                         if loyalty_points >= 10:
                             print("This client is eligible for a free shave!")
-                            redeem = input("Would the client like to redeem 10 loyalty points for a free shave? (yes/no): ").strip().lower()
+                            redeem = input(
+                                "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
+                                ).strip().lower()
                             if redeem == 'yes':
                                 new_points = loyalty_points - 10
                                 visits.update_cell(visits_data.index(visit_row) + 1, 3, new_points)
@@ -123,7 +125,7 @@ def add_new_client():
                     new_client.append(phone_number)
                     break
                 else:
-                    print("Invalid phone number. Please enter a valid UK phone number starting with +44 or 0 followed by 10 digits.")
+                    print("Invalid phone number. Must start with +44 or 0 followed by 10 digits.")
         elif header.lower() != 'client id':
             value = input(f"Enter {header}: ")
             new_client.append(value)
@@ -157,11 +159,15 @@ def log_client_visit():
 
             if new_points >= 10:
                 print("The client has earned a free shave!")
-                redeem = input("Would the client like to redeem 10 loyalty points for a free shave? (yes/no): ").strip().lower()
+                redeem = input(
+                    "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
+                    ).strip().lower()
                 if redeem == 'yes':
                     new_points -= 10
                     visits.update_cell(i, 3, new_points)
-                    print("*Points redeemed* The client has used 10 loyalty points for a free shave.")
+                    print(
+                        "*Points redeemed* The client has used 10 loyalty points for a free shave."
+                        )
                 else:
                     print("Loyalty points not redeemed.")
 
