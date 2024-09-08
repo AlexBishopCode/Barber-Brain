@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import re
 
 SCOPE = {
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,6 +24,10 @@ client_data = client_data[1:]
 
 visits = SHEET.worksheet('visits')
 visits_data = visits.get_all_values()
+
+def is_phone_number_valid(number):
+    pattern = r"^(?:\+44|0)\d{10}$"
+    return re.match(pattern, number) is not None
 
 def login():
     while True:
@@ -108,19 +113,28 @@ def add_new_client():
     new_client = []
     print("Enter the new client's details: ")
 
-    new_client_id = len(client_data) +1
+    new_client_id = len(client_data) + 1
     
     for header in headers:
-        if header.lower() != 'client id':
-            new_client.append(input(f"{header}: "))
+        if header.lower() == 'phone number':
+            while True:
+                phone_number = input(f"Enter {header}: ")
+                if is_phone_number_valid(phone_number):
+                    new_client.append(phone_number)
+                    break
+                else:
+                    print("Invalid phone number. Please enter a valid UK phone number starting with +44 or 0 followed by 10 digits.")
+        elif header.lower() != 'client id':
+            value = input(f"Enter {header}: ")
+            new_client.append(value)
 
     new_client.insert(2, new_client_id)
 
     clients.append_row(new_client)
-    print("New client created. Clients ID:", new_client_id)
+    print("New client created. Client ID:", new_client_id)
 
     visits.append_row([new_client_id, 0, 0])
-    print(f"Added client ID {new_client_id} to visits sheet (0 visits - 0 loyalty points).") 
+    print(f"Added client ID {new_client_id} to visits sheet (0 visits - 0 loyalty points).")
 
 def log_client_visit():
     client_id = input("Enter the client's ID to log a visit: ")
