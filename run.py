@@ -29,6 +29,10 @@ def is_phone_number_valid(number):
     pattern = r"^(?:\+44|0)\d{10}$"
     return re.match(pattern, number) is not None
 
+def is_email_address_valid(email):
+    regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(regex, email) is not None
+
 def login():
     while True:
         print("Barber Brain Staff Login")
@@ -139,6 +143,14 @@ def add_new_client():
                     break
                 else:
                     print("Invalid phone number. Must start with +44 or 0 followed by 10 digits.")
+        elif header.lower() == 'email address':
+            while True:
+                email = input(f"Enter {header}: ")
+                if is_email_address_valid(email):
+                    new_client.append(email)
+                    break
+                else:
+                    print("Invalid email address. Please enter a valid email address.")
         elif header.lower() != 'client id':
             value = input(f"Enter {header}: ")
             new_client.append(value)
