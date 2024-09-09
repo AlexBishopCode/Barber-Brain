@@ -118,9 +118,19 @@ def add_new_client():
     new_client = []
     print("Enter the new client's details: ")
 
-    new_client_id = len(client_data) + 1
+    global client_data
+    client_data = clients.get_all_values()
+    headers = client_data[0]
+    client_data = client_data[1:]
+
+    if client_data:
+        current_client_ids = [int(row[2]) for row in client_data if row[2].isdigit()]
+        new_client_id = max(current_client_ids) + 1 if current_client_ids else 1
+    else:
+        new_client_id = 1
+
     
-    for header in headers:
+    for header in headers: 
         if header.lower() == 'phone number':
             while True:
                 phone_number = input(f"Enter {header}: ")
