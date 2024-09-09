@@ -135,11 +135,14 @@ def add_new_client():
 
     new_client.insert(2, new_client_id)
 
+    friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
+    starting_loyalty_points = 10 if friend_referral == 'yes' else 0
+
     clients.append_row(new_client)
     print("New client created. Client ID:", new_client_id)
 
-    visits.append_row([new_client_id, 0, 0])
-    print(f"Added client ID {new_client_id} to visits sheet (0 visits - 0 loyalty points).")
+    visits.append_row([new_client_id, 0, starting_loyalty_points])
+    print(f"Added client ID {new_client_id} to visits sheet (0 visits - {starting_loyalty_points} loyalty points).")
 
 def log_client_visit():
     client_id = input("Enter the client's ID to log a visit: ")
