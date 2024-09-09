@@ -63,13 +63,13 @@ def main():
 
 def search_client():
     while True:
-        first_name = input("Enter the clients first name (or type exit to quit): ")
+        first_name = input("Enter the clients first name (or type exit to quit): ").strip().capitalize()
 
         if first_name.lower() == 'exit':
             print("Exiting the search.")
             break
 
-        second_name = input("Enter the client's second name (or type 'exit' to quit): ")
+        second_name = input("Enter the client's second name (or type 'exit' to quit): ").strip().capitalize()
 
         if second_name.lower() == 'exit':
             print("Exiting the search.")
@@ -77,7 +77,7 @@ def search_client():
 
         found = False
         for row in client_data:
-            if first_name.lower() == row[0].lower() and second_name.lower() == row[1].lower():
+            if first_name == row[0].capitalize() and second_name == row[1].capitalize():
                 client_id = row[2]
                 print("\nDetails found:")
                 for i in range(len(headers)):
