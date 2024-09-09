@@ -86,7 +86,10 @@ def search_client():
                 visits_data = visits.get_all_values()
                 for visit_row in visits_data[1:]:
                     if visit_row[0] == client_id:
+                        total_visits = int(visit_row[1])
                         loyalty_points = int(visit_row[2])
+
+                        print(f"Number of visits: {total_visits}")
                         print(f"Loyalty Points: {loyalty_points}")
 
                         if loyalty_points >= 10:
@@ -176,7 +179,6 @@ def log_client_visit():
 
     if not client_found:
         print("Client ID could not be found.")
-
 
 def navigation_menu():
     
