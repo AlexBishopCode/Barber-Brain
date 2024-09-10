@@ -80,7 +80,7 @@ def main():
 
 def search_client():
     while True:
-        first_name = input("Enter the clients first name (or type exit to quit): ").strip().capitalize()
+        first_name = input("Enter the client's first name (or type 'exit' to quit): ").strip().capitalize()
 
         if first_name.lower() == 'exit':
             print("Exiting the search.")
@@ -123,12 +123,12 @@ def search_client():
                             print("This client is eligible for a free shave!")
                             redeem = input(
                                 "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
-                                ).strip().lower()
+                            ).strip().lower()
                             while redeem not in ('yes', 'no'):
                                 print("Please enter 'yes' or 'no'.")
                                 redeem = input(
                                     "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
-                                    ).strip().lower()
+                                ).strip().lower()
                             if redeem == 'yes':
                                 new_points = loyalty_points - 10
                                 visits.update_cell(visits_data.index(visit_row) + 1, 3, new_points)
@@ -142,9 +142,8 @@ def search_client():
                         break
                 break
 
-    if not found:
-        print("No details found for that name.")
-    return
+        if not found:
+            print("No details found for that name.")
 
 def add_new_client():
     new_client = []
