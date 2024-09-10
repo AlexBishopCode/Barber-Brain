@@ -36,13 +36,13 @@ def print_title():
     """
     print(title)
 
-def is_phone_number_valid(number):
-    pattern = r"^(?:\+44|0)\d{10}$"
-    return re.match(pattern, number) is not None
-
-def is_email_address_valid(email):
-    regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
-    return re.match(regex, email) is not None
+def check_input_valid(input_value, validation_type):
+    
+    patterns = {
+        'phone': r"^(?:\+44|0)\d{10}$",
+        'email': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    }
+    return re.match(patterns[validation_type], input_value) is not None
 
 def login():
     while True:
@@ -150,7 +150,7 @@ def add_new_client():
         if header.lower() == 'phone number':
             while True:
                 phone_number = input(f"Enter {header}: ")
-                if is_phone_number_valid(phone_number):
+                if check_input_valid(phone_number, 'phone'):
                     new_client.append(phone_number)
                     break
                 else:
@@ -158,7 +158,7 @@ def add_new_client():
         elif header.lower() == 'email address':
             while True:
                 email = input(f"Enter {header}: ")
-                if is_email_address_valid(email):
+                if check_input_valid(email, 'email'):
                     new_client.append(email)
                     break
                 else:
