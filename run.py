@@ -25,6 +25,17 @@ client_data = client_data[1:]
 visits = SHEET.worksheet('visits')
 visits_data = visits.get_all_values()
 
+def print_title():
+    title = """
+    ##################################################################
+    #                                                                #
+    #                          BARBER BRAIN                          #
+    #                         Loyalty System                         #
+    #                                                                #
+    ##################################################################
+    """
+    print(title)
+
 def is_phone_number_valid(number):
     pattern = r"^(?:\+44|0)\d{10}$"
     return re.match(pattern, number) is not None
@@ -55,6 +66,7 @@ def logout():
     return False
 
 def main():
+    print_title()
 
     while True:
         if login():
