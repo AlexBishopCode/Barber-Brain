@@ -14,10 +14,11 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('barber_brain')
 
 def fetch_all_data():
-    global staff_members, client_data, visits_data, headers
+    global staff_members, client_data, visits_data, headers, visits
     staff_members = SHEET.worksheet('staff').get_all_values()
     client_data = SHEET.worksheet('clients').get_all_values()
     visits_data = SHEET.worksheet('visits').get_all_values()
+    visits = SHEET.worksheet('visits')
 
     headers = client_data[0]
     client_data = client_data[1:]
@@ -212,6 +213,7 @@ def add_new_client():
     print(f"Added client ID {new_client_id} to visits sheet (0 visits - {starting_loyalty_points} loyalty points).")
 
 def log_client_visit():
+    global visits
     client_id = input("Enter the client's ID to log a visit: ")
 
     fetch_all_data()
