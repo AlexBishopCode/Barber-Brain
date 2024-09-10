@@ -48,7 +48,7 @@ def login():
         staff_username = input("Username: ").strip()
         staff_password = input("Password: ").strip()
 
-        for row in staff_members_data[1:]:
+        for row in staff_members[1:]:
             sheet_username = row[1]
             sheet_password = row[2]
 
