@@ -13,14 +13,16 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('barber_brain')
 
-staff_members = SHEET.worksheet('staff').get_all_values()
-clients = SHEET.worksheet('clients')
-client_data = clients.get_all_values()
-visits = SHEET.worksheet('visits')
-visits_data = visits.get_all_values()
+def fetch_all_data():
+    global staff_members, client_data, visits_data, headers
+    staff_members = SHEET.worksheet('staff').get_all_values()
+    client_data = SHEET.worksheet('clients').get_all_values()
+    visits_data = SHEET.worksheet('visits').get_all_values()
 
-headers = client_data[0]
-client_data = client_data[1:]
+    headers = client_data[0]
+    client_data = client_data[1:]
+
+fetch_all_data()
 
 def print_title():
     title = """
@@ -131,9 +133,7 @@ def add_new_client():
     print("Enter the new client's details: ")
 
     global client_data, headers
-    client_data = clients.get_all_values()
-    headers = client_data[0]
-    client_data = client_data[1:]
+    fetch_all_data()
 
     if client_data:
         current_client_ids = [int(row[2]) for row in client_data if row[2].isdigit()]
@@ -168,6 +168,9 @@ def add_new_client():
     friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
     starting_loyalty_points = 10 if friend_referral == 'yes' else 0
 
+    clients = SHEET.worksheet('clients')
+    visits = SHEET.worksheet('visits')  
+
     clients.append_row(new_client)
     print("New client created. Client ID:", new_client_id)
 
@@ -177,8 +180,7 @@ def add_new_client():
 def log_client_visit():
     client_id = input("Enter the client's ID to log a visit: ")
 
-    global visits_data
-    visits_data = visits.get_all_values()
+    fetch_all_data()
     client_found = False
 
     for i, row in enumerate(visits_data[1:], start=2):
