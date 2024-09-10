@@ -82,7 +82,8 @@ def search_client():
 
         if first_name.lower() == 'exit':
             print("Exiting the search.")
-            break
+            return
+
         if not first_name:
             print("Please enter a first name.")
             continue
@@ -92,48 +93,56 @@ def search_client():
 
             if second_name.lower() == 'exit':
                 print("Exiting the search.")
-                break
+                return
+
             if not second_name:
                 print("Please enter a surname.")
                 continue
 
-            found = False
-            for row in client_data:
-                if first_name == row[0].capitalize() and second_name == row[1].capitalize():
-                    client_id = row[2]
-                    print("\nDetails found:")
-                    for i in range(len(headers)):
-                        print(f"{headers[i]}: {row[i]}")
+            break
 
-                    for visit_row in visits_data[1:]:
-                        if visit_row[0] == client_id:
-                            total_visits = int(visit_row[1])
-                            loyalty_points = int(visit_row[2])
+        found = False
+        for row in client_data:
+            if first_name == row[0].capitalize() and second_name == row[1].capitalize():
+                client_id = row[2]
+                print("\nDetails found:")
+                for i in range(len(headers)):
+                    print(f"{headers[i]}: {row[i]}")
 
-                            print(f"Number of visits: {total_visits}")
-                            print(f"Loyalty Points: {loyalty_points}")
+                for visit_row in visits_data[1:]:
+                    if visit_row[0] == client_id:
+                        total_visits = int(visit_row[1])
+                        loyalty_points = int(visit_row[2])
 
-                            if loyalty_points >= 10:
-                                print("This client is eligible for a free shave!")
+                        print(f"Number of visits: {total_visits}")
+                        print(f"Loyalty Points: {loyalty_points}")
+
+                        if loyalty_points >= 10:
+                            print("This client is eligible for a free shave!")
+                            redeem = input(
+                                "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
+                                ).strip().lower()
+                            while redeem not in ('yes', 'no'):
+                                print("Please enter 'yes' or 'no'.")
                                 redeem = input(
                                     "Would the client like to redeem 10 loyalty points for a free shave? (yes/no): "
                                     ).strip().lower()
-                                if redeem == 'yes':
-                                    new_points = loyalty_points - 10
-                                    visits.update_cell(visits_data.index(visit_row) + 1, 3, new_points)
-                                    print("*Points redeemed* Client has used 10 loyalty points for a free shave.")
-                                else:
-                                    print("Loyalty points not redeemed.")
+                            if redeem == 'yes':
+                                new_points = loyalty_points - 10
+                                visits.update_cell(visits_data.index(visit_row) + 1, 3, new_points)
+                                print("*Points redeemed* Client has used 10 loyalty points for a free shave.")
                             else:
-                                print("This client is not eligible for a free shave yet.")
-                            
-                            found = True
-                            break
-                    break
+                                print("Loyalty points not redeemed.")
+                        else:
+                            print("This client is not eligible for a free shave yet.")
+                        
+                        found = True
+                        break
+                break
 
-        if not found:
-            print("No details found for that name.")
-            break
+    if not found:
+        print("No details found for that name.")
+    return
 
 def add_new_client():
     new_client = []
