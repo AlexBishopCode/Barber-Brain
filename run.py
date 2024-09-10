@@ -160,7 +160,15 @@ def add_new_client():
 
     
     for header in headers: 
-        if header.lower() == 'phone number':
+        if header.lower() == 'first name' or header.lower() == 'surname':
+            while True:
+                value = input(f"Enter {header}: ").strip()
+                if value:
+                    new_client.append(value.capitalize())
+                    break
+                else:
+                    print(f"{header} cannot be empty.")
+        elif header.lower() == 'phone number':
             while True:
                 phone_number = input(f"Enter {header}: ").strip()
                 if phone_number and check_input_valid(phone_number, 'phone'):
