@@ -13,17 +13,14 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('barber_brain')
 
-staff_members = SHEET.worksheet('staff')
-staff_members_data = staff_members.get_all_values()
-
+staff_members = SHEET.worksheet('staff').get_all_values()
 clients = SHEET.worksheet('clients')
 client_data = clients.get_all_values()
+visits = SHEET.worksheet('visits')
+visits_data = visits.get_all_values()
 
 headers = client_data[0]
 client_data = client_data[1:]
-
-visits = SHEET.worksheet('visits')
-visits_data = visits.get_all_values()
 
 def print_title():
     title = """
@@ -99,7 +96,6 @@ def search_client():
                 for i in range(len(headers)):
                     print(f"{headers[i]}: {row[i]}")
 
-                visits_data = visits.get_all_values()
                 for visit_row in visits_data[1:]:
                     if visit_row[0] == client_id:
                         total_visits = int(visit_row[1])
@@ -134,7 +130,7 @@ def add_new_client():
     new_client = []
     print("Enter the new client's details: ")
 
-    global client_data
+    global client_data, headers
     client_data = clients.get_all_values()
     headers = client_data[0]
     client_data = client_data[1:]
@@ -181,6 +177,7 @@ def add_new_client():
 def log_client_visit():
     client_id = input("Enter the client's ID to log a visit: ")
 
+    global visits_data
     visits_data = visits.get_all_values()
     client_found = False
 
