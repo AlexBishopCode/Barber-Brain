@@ -145,27 +145,36 @@ def add_new_client():
     for header in headers: 
         if header.lower() == 'phone number':
             while True:
-                phone_number = input(f"Enter {header}: ")
-                if check_input_valid(phone_number, 'phone'):
+                phone_number = input(f"Enter {header}: ").strip()
+                if phone_number and check_input_valid(phone_number, 'phone'):
                     new_client.append(phone_number)
                     break
                 else:
                     print("Invalid phone number. Must start with +44 or 0 followed by 10 digits.")
         elif header.lower() == 'email address':
             while True:
-                email = input(f"Enter {header}: ")
-                if check_input_valid(email, 'email'):
+                email = input(f"Enter {header}: ").strip()
+                if email and check_input_valid(email, 'email'):
                     new_client.append(email)
                     break
                 else:
                     print("Invalid email address. Please enter a valid email address.")
         elif header.lower() != 'client id':
-            value = input(f"Enter {header}: ")
-            new_client.append(value)
+            while True:
+                value = input(f"Enter {header}: ").strip()
+                if value:
+                    new_client.append(value)
+                    break
+                else:
+                    print(f"{header} cannot be empty.")
 
     new_client.insert(2, new_client_id)
 
     friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
+    while friend_referral not in ('yes', 'no'):
+        print("Please enter 'yes' or 'no'.")
+        friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
+
     starting_loyalty_points = 10 if friend_referral == 'yes' else 0
 
     clients = SHEET.worksheet('clients')
