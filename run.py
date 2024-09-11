@@ -56,6 +56,7 @@ def check_input_valid(input_value, validation_type):
 
     patterns = {
         'phone': r"^(?:\+44|0)\d{10}$",
+        # [SOURCE CODE FOR EMAIL VALIDATION INFO = https://www.regular-expressions.info/email.html]
         'email': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     }
     return re.match(patterns[validation_type], input_value) is not None
@@ -346,6 +347,7 @@ def main():
             break
 
 
-
+# [SOURCE CODE = https://stackoverflow.com/
+# questions/1954700/whats-the-point-of-a-main-function-and-or-name-main-check-in-pytho}
 if __name__ == "__main__":
     main()
