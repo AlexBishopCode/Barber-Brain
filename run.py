@@ -90,24 +90,6 @@ def logout():
     return False
 
 
-def main():
-    """
-    Function which runs the application.
-
-    Prints title, presents login and handles the navigation elements within the systems menu.
-    """
-    print_title()
-
-    while True:
-        if login():
-            while True:
-                if not navigation_menu():
-                    break
-        else:
-            print("Login failed. Exiting program.")
-            break
-
-
 def search_client():
     """
     Function which searches for an existing client based on first name and second name
@@ -322,6 +304,25 @@ def navigation_menu():
             return logout()
         else:
             print("Invalid choice. Enter option (1/2/3/4).")
+
+
+def main():
+    """
+    Function which runs the application.
+
+    Prints title, presents login and handles the navigation elements within the systems menu.
+    """
+    print_title()
+
+    while True:
+        if login():
+            while True:
+                if not navigation_menu():
+                    break
+        else:
+            print("Login failed. Exiting program.")
+            break
+
 
 
 if __name__ == "__main__":
