@@ -15,16 +15,12 @@ Barber Brain is a comprehensive loyalty management system designed specifically 
    - [Existing Features](#existing-features)
    - [Future Features](#future-features)
 5. [Technologies Used](#technologies-used)
-6. [Frameworks, Libraries & Programs Used](#frameworks-libraries--programs-used)
-7. [Version Control](#version-control)
-8. [Testing](#testing)
-9. [Development](#development)
-10. [Deployment](#deployment)
-11. [Usage](#usage)
-12. [Contributing](#contributing)
-13. [License](#license)
-14. [Contact](#contact)
-15. [Google Sheets Information](#google-sheets-information)
+6. [Version Control](#version-control)
+7. [Testing](#testing)
+8. [Deployment](#deployment)
+9. [Contact](#contact)
+10. [Google Sheets Information](#google-sheets-information)
+11. [Credits](#credits)
 
 ## Introduction
 
@@ -32,12 +28,12 @@ Barber Brain is a comprehensive loyalty management system designed specifically 
 
 The client operates a barbershop in a busy city center and seeks a loyalty system to enhance customer engagement and boost repeat business. The new system should efficiently manage the existing loyalty scheme, where clients earn a free shave after ten visits. It must be accessible to all staff, providing them with clients' loyalty and personal information to improve the customer experience.
 
-### User Stories
+### User Requirements
 
-1. **Staff Member**: Easily access the system, type the client's name, and find their details with minimal clicks.
-2. **Barber Shop Owner**: View client visit frequency to understand repeat trade.
-3. **Barber Shop Owner**: Add login details for new staff members.
-4. **Staff Member**: The system should provide clear client details as a prompt without relying on memory.
+1. **As a Staff Member**, I wnat to easily access the system, type the client's name, and find their details with minimal clicks.
+2. **As the Barber Shop Owner**, I want to View client visit frequency to understand repeat trade.
+3. **As the Barber Shop Owner**, I wans to add login details for new staff members.
+4. **SAs a staff member**, I want the system to provide clear client details as a prompt without relying on memory.
 
 ## System Data Flow Chart
 
@@ -55,13 +51,20 @@ Created on [Canva](https://www.canva.com/)
 - **Loyalty Points System**: Award and manage loyalty points.
 - **Personalized Rewards**: Offer rewards like free shaves to loyal clients.
 - **Title Banner**: A graphic banner at the top of the system frames the application, providing structure and visual appeal.
+> ![Title Banner Screengrab](assets/images/barber_title.png)
 - **Login Section**: A secure login page where staff members enter their username and password to access the system.
+> ![Title Banner Screengrab](assets/images/barber_login.png)
 - **Navigation Menu**: Allows staff to navigate between searching for clients, adding new clients, logging visits, and logging out.
+> ![Title Banner Screengrab](assets/images/barber_nav.png)
 - **Search for a Client**: A search feature where staff can look up clients by first and last name to view loyalty details and personal information.
 - **Add a New Client**: A form for adding new clients, allowing staff to enter details like name, contact info, and referral information.
 - **Log a Client Visit**: Record a client's visit, update their visit count and loyalty points, and check if they qualify for a free shave.
 - **Loyalty Points Management**: Manages client loyalty points, including a prompt to redeem points for a free shave if they have earned enough.
+> ![Loyalty Points Redeem Screengrab](assets/images/barber_redeem_yes.png)
+> ![Free Shave Redeem Screengrab](assets/images/barber_redeem_shave.png)
 - **Error Handling and Validation**: Error messages and checks ensure all entered information, like emails and phone numbers, is correct.
+> ![Phone Validation Error Message Screengrab](assets/images/barber_invalid_phone.png)
+> ![Email Validation Error Message Screengrab](assets/images/barber_invalid_email.png)
 - **Logout Feature**: A straightforward button for staff to log out securely.
 
 ### Future Features
