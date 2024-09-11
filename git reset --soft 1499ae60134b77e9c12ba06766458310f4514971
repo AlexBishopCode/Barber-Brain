@@ -1,0 +1,183 @@
+[33mcommit 87691d42befc2deec1fc4dbae9dd536dfe284745[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:05:37 2024 +0000
+
+    update README images
+
+[33mcommit 44d91eb3a8d3dc1742b14f644abac256667936fa[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:03:31 2024 +0000
+
+    Update README images
+
+[33mcommit 34bd0bff0eaa57e2dcaa1fcf92691b527f7445c4[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 03:59:52 2024 +0000
+
+    Remove screengrabs in wrong format, add to README
+
+[33mcommit 142d62d8e780bc85e0c21d2941baeb964928dbe0[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:57:53 2024 +0100
+
+    Upload screengrab
+
+[33mcommit fba2c446cb6e004821ada959b1bfe22fd04d4d3b[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:56:14 2024 +0100
+
+    Upload screengrab
+
+[33mcommit 1b00594444d2e800ae4101b804f338a2ba7fad6d[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:54:18 2024 +0100
+
+    Upload new testing screengrab
+
+[33mcommit f9faf2373bd5a3f00cb022ed562bab1a4b6798e0[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:50:17 2024 +0100
+
+    Upload screengrab
+
+[33mcommit fe528ca4e5872a7bb7f02cc55fa4436685073af7[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 04:46:10 2024 +0100
+
+    Upload screengrabs
+
+[33mcommit 1499ae60134b77e9c12ba06766458310f4514971[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 03:43:40 2024 +0000
+
+    move images into assets/images folder
+
+[33mcommit afd4a3556b8518f78835f52a29af0b3cd35f1c0b[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 03:41:41 2024 +0000
+
+    Update after Linter. Add link to README
+
+[33mcommit d56cba3706325fe24f19eac638db1f528b24e6ef[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 02:51:36 2024 +0000
+
+    README image upload
+
+[33mcommit 7cb20958ed3d5fd740ecebee55fe7397a0117e5c[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 02:49:59 2024 +0000
+
+    Add flow chart to README
+
+[33mcommit 1d7de4587acfb80afd159cf55abd98f8e4c482c4[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 03:48:33 2024 +0100
+
+    add flow chart png
+
+[33mcommit f6f037b535fae5416aad8c3a2e0580750ba2a801[m
+Merge: 759cf85 1088bcc
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 02:45:43 2024 +0000
+
+    Merge branch 'main' of https://github.com/AlexBishopCode/Barber-Brain
+
+[33mcommit 1088bcc0023a258896fd30bdc74ce5d2e245a07a[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 03:45:11 2024 +0100
+
+    upload flow chart pdf
+
+[33mcommit 759cf8580f4cd793452965ec8f58551c454a3164[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 02:44:30 2024 +0000
+
+    Reduce line characters (initial)
+
+[33mcommit f3a51b661645874ae15898528119c5763d153f63[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 02:05:01 2024 +0000
+
+    Add __name__ and email validation source code
+
+[33mcommit 3d20cc1e6cfeed614ec428d228a91f224823ca8f[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 01:28:46 2024 +0000
+
+    Update validation criteria for add_new_client
+
+[33mcommit f6aafd39e13349d9b4a273475ef2df88229270c0[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 01:08:32 2024 +0000
+
+    Add comments to imports and Google sheets info
+
+[33mcommit ab76fb7f856339273bee8b4cb0bfc7d8ad8645da[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 00:46:01 2024 +0000
+
+    Relocate main function to improve flow
+
+[33mcommit 8d41b7ebfa6b0998cba05ca1e2d511b791d455e7[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 00:43:38 2024 +0000
+
+    Add docstrings to code
+
+[33mcommit 6cf7cf878f883ff39f7c81ae3652ac4b947dcb6b[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 00:18:04 2024 +0000
+
+    Update README and reconfigure after lint
+
+[33mcommit d2df450f40650d2a1162a84f99d7754061aeb74f[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Wed Sep 11 00:53:10 2024 +0100
+
+    Add pdfs to repository
+
+[33mcommit 72777a87a19bb9fb3f1175e09b148dd54cb15f2e[m
+Merge: 1f07335 91bfe62
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 19:46:30 2024 +0000
+
+    Merge branch 'main' of https://github.com/AlexBishopCode/Barber-Brain
+
+[33mcommit 1f07335d0617d7d10e3a899c5e19d54c90fa2fba[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 19:43:48 2024 +0000
+
+    Edit header and add to README
+
+[33mcommit 91bfe62c4e2efd81d17d4788b265236e02b1c3de[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 20:41:43 2024 +0100
+
+    Add test table pdf
+
+[33mcommit c637cbcc7abaccd0a60a5e90f72713917b19753d[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 20:41:17 2024 +0100
+
+    Delete barber_brain_test_table.pdf
+    
+    Delete table pdf upload
+
+[33mcommit b5f00c15379a037ac6279b0ee1bc9510f475ca2b[m
+Author: AlexBishopCode <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 20:37:36 2024 +0100
+
+    Add files via upload
+
+[33mcommit f4508938599ecbc3406a824ff239995340e8e3c9[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 14:50:06 2024 +0000
+
+    fix return bug in search_client
+
+[33mcommit e7a1972adcedaacb0f0374499aba715ec14e3747[m
+Author: Alexander Bishop <2kok8sho@students.codeinstitute.net>
+Date:   Tue Sep 10 13:47:15 2024 +0000
+
+    Add to requirements.txt
