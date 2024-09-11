@@ -1,3 +1,4 @@
+
 # Import external libraries for Google Sheets / authentication
 import gspread
 from google.oauth2.service_account import Credentials
@@ -51,6 +52,7 @@ def print_title():
     """
     print(title)
 
+
 def validate_input(prompt, validation_function, error_message):
     """
     Input validation functions.
@@ -61,16 +63,20 @@ def validate_input(prompt, validation_function, error_message):
             return value
         print(error_message)
 
+
 def is_valid_name(value):
     # re.match checks if the input matches pattern (left)
     # and bool() covernts into True or False
     return bool(re.match(r"^[A-Za-z\s]+$", value))
 
+
 def is_valid_phone(value):
     return bool(re.match(r"^(?:\+44|0)\d{10}$", value))
 
+
 def is_valid_email(value):
     return bool(re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', value))
+
 
 def is_valid_pronouns(value):
     return bool(re.match(r"^[A-Za-z\s/]+/[A-Za-z\s/]+$", value))
@@ -208,52 +214,81 @@ def search_client():
 def add_new_client():
     """
     Adds a new client to the system, asking for various details to be
-    inputted. If the client is referred by a friend, they are awarded 10
-    loyalty points.
+    inputted. If the client is referred by a friend, they are awarded
+    10 loyalty points.
     """
     new_client = []
     print("Enter the new client's details: ")
 
     global client_data, headers
     fetch_all_data()
+
     # Determine value of next client ID
     if client_data:
-        current_client_ids = [int(row[2]) for row in client_data if row[2].isdigit()]
+        current_client_ids = [
+            int(row[2]) for row in client_data if row[2].isdigit()
+        ]
         new_client_id = max(current_client_ids) + 1 if current_client_ids else 1
     else:
         new_client_id = 1
 
     # Retrieve client details from headers and validate accordingly
     for header in headers:
-        if header.lower() == 'first name' or header.lower() == 'surname':
+        if header.lower() in ['first name', 'surname']:
             new_client.append(
-                validate_input(f"Enter {header}: ", is_valid_name, f"{header} must only contain letters and spaces.")
+                validate_input(
+                    f"Enter {header}: ",
+                    is_valid_name,
+                    f"{header} must only contain letters and spaces."
+                )
             )
         elif header.lower() == 'pronouns':
             new_client.append(
-                validate_input(f"Enter {header}: ", is_valid_pronouns, "Pronouns must include a slash and only contain letters, spaces, or slashes.")
+                validate_input(
+                    f"Enter {header}: ",
+                    is_valid_pronouns,
+                    "Pronouns must include a slash and contain letters, "
+                    "spaces, or slashes."
+                )
             )
         elif header.lower() == 'phone number':
             new_client.append(
-                validate_input(f"Enter {header}: ", is_valid_phone, "Invalid phone number. Must start with +44 or 0 followed by 10 digits.")
+                validate_input(
+                    f"Enter {header}: ",
+                    is_valid_phone,
+                    "Invalid no. Must start with +44 / 0 followed by 10 digits"
+                )
             )
         elif header.lower() == 'email address':
             new_client.append(
-                validate_input(f"Enter {header}: ", is_valid_email, "Invalid email address. Please enter a valid email address.")
+                validate_input(
+                    f"Enter {header}: ",
+                    is_valid_email,
+                    "Invalid email address. Enter a valid email address."
+                )
             )
         elif header.lower() != 'client id':
             new_client.append(
-                validate_input(f"Enter {header}: ", is_valid_name, f"{header} must only contain letters and spaces.")
+                validate_input(
+                    f"Enter {header}: ",
+                    is_valid_name,
+                    f"{header} must only contain letters and spaces."
+                )
             )
 
     # Insert the new client ID
     new_client.insert(2, new_client_id)
 
     # Check if the client was referred by a friend
-    friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
+    friend_referral = input(
+        "Was the client referred by a friend? (yes/no): "
+    ).strip().lower()
+
     while friend_referral not in ('yes', 'no'):
         print("Please enter 'yes' or 'no'.")
-        friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
+        friend_referral = input(
+            "Was the client referred by a friend? (yes/no): "
+        ).strip().lower()
 
     starting_loyalty_points = 10 if friend_referral == 'yes' else 0
 
@@ -265,8 +300,10 @@ def add_new_client():
 
     # Add the client to the 'visits' sheet also
     visits.append_row([new_client_id, 0, starting_loyalty_points])
-    print(f"Added client ID {new_client_id} to visits sheet (0 visits - {starting_loyalty_points} loyalty points).")
-
+    print(
+        f"Added client ID {new_client_id} to visits sheet "
+        f"(0 visits - {starting_loyalty_points} loyalty points)."
+    )
 
 
 def log_client_visit():
@@ -280,7 +317,8 @@ def log_client_visit():
     client_found = False
 
     """
-    [Source Material for enumerate research] = https://docs.python.org/3/library/functions.html#enumerate 
+    [Source Material for enumerate research] =
+    https://docs.python.org/3/library/functions.html#enumerate
     and https://www.youtube.com/watch?v=nI-jkrJxlz0)
     """
     for i, row in enumerate(visits_data[1:], start=2):
