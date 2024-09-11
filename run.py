@@ -51,32 +51,27 @@ def print_title():
     """
     print(title)
 
+def validate_input(prompt, validation_function, error_message):
+    """
+    Input validation functions.
+    """
+    while True:
+        value = input(prompt).strip()
+        if validation_function(value):
+            return value
+        print(error_message)
 
-def check_input_valid(input_value, validation_type):
-    """
-    Validates input data for phone numbers and emails.
-    """
-    patterns = {
-        'phone': r"^(?:\+44|0)\d{10}$",
-        # [SOURCE CODE FOR EMAIL VALIDATION INFO =
-        # https://www.regular-expressions.info/email.html]
-        'email': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'}
-    return re.match(patterns[validation_type], input_value) is not None
+def is_valid_name(value):
+    return bool(re.match(r"^[A-Za-z\s]+$", value))
 
+def is_valid_phone(value):
+    return bool(re.match(r"^(?:\+44|0)\d{10}$", value))
 
-def is_letters_only(input_value):
-    """
-    Checks if input value contains only letters and spaces.
-    """
-    return re.match(r"^[A-Za-z\s]+$", input_value) is not None
+def is_valid_email(value):
+    return bool(re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', value))
 
-
-def is_pronouns(input_value):
-    """
-    Checks if input contains only letters, spaces, and forward slashes.
-    Requires one forward slash to separate pronouns.
-    """
-    return re.match(r"^[A-Za-z\s/]+/[A-Za-z\s/]+$", input_value) is not None
+def is_valid_pronouns(value):
+    return bool(re.match(r"^[A-Za-z\s/]+/[A-Za-z\s/]+$", value))
 
 
 def login():
@@ -221,88 +216,55 @@ def add_new_client():
     fetch_all_data()
     # Determine value of next client ID
     if client_data:
-        current_client_ids = [
-            int(row[2]) for row in client_data if row[2].isdigit()
-        ]
-
-        if current_client_ids:
-            max_id = max(current_client_ids)
-            new_client_id = max_id + 1
-        else:
-            new_client_id = 1
+        current_client_ids = [int(row[2]) for row in client_data if row[2].isdigit()]
+        new_client_id = max(current_client_ids) + 1 if current_client_ids else 1
     else:
         new_client_id = 1
-    # Retrieve client details from headers
+
+    # Retrieve client details from headers and validate accordingly
     for header in headers:
         if header.lower() == 'first name' or header.lower() == 'surname':
-            while True:
-                value = input(f"Enter {header}: ").strip()
-                if value and is_letters_only(value):
-                    new_client.append(value.capitalize())
-                    break
-                else:
-                    print(f"{header} must only contain letters and spaces and "
-                          "cannot be empty.")
+            new_client.append(
+                validate_input(f"Enter {header}: ", is_valid_name, f"{header} must only contain letters and spaces.")
+            )
         elif header.lower() == 'pronouns':
-            while True:
-                value = input(f"Enter {header}: ").strip()
-                if value and is_pronouns(value):
-                    new_client.append(value)
-                    break
-                else:
-                    print(f"{header} must only contain letters, "
-                          "spaces, or slashes, "
-                          "and must include one slash to separate pronouns.")
+            new_client.append(
+                validate_input(f"Enter {header}: ", is_valid_pronouns, "Pronouns must include a slash and only contain letters, spaces, or slashes.")
+            )
         elif header.lower() == 'phone number':
-            while True:
-                phone_number = input(f"Enter {header}: ").strip()
-                if phone_number and check_input_valid(phone_number, 'phone'):
-                    new_client.append(phone_number)
-                    break
-                else:
-                    print("Invalid phone number. Must start with +44 or 0 "
-                          "followed by 10 digits.")
+            new_client.append(
+                validate_input(f"Enter {header}: ", is_valid_phone, "Invalid phone number. Must start with +44 or 0 followed by 10 digits.")
+            )
         elif header.lower() == 'email address':
-            while True:
-                email = input(f"Enter {header}: ").strip()
-                if email and check_input_valid(email, 'email'):
-                    new_client.append(email)
-                    break
-                else:
-                    print("Invalid email address. "
-                          "Please enter a valid email address.")
+            new_client.append(
+                validate_input(f"Enter {header}: ", is_valid_email, "Invalid email address. Please enter a valid email address.")
+            )
         elif header.lower() != 'client id':
-            while True:
-                value = input(f"Enter {header}: ").strip()
-                if value and is_letters_only(value):
-                    new_client.append(value)
-                    break
-                else:
-                    print(f"{header} must only contain letters "
-                          "and spaces and cannot be empty.")
-    # Inputs new client ID at the start
+            new_client.append(
+                validate_input(f"Enter {header}: ", is_valid_name, f"{header} must only contain letters and spaces.")
+            )
+
+    # Insert the new client ID
     new_client.insert(2, new_client_id)
-    # Check if client if from a friends referral
-    friend_referral = input(
-        "Was the client referred by a friend? (yes/no): "
-    ).strip().lower()
+
+    # Check if the client was referred by a friend
+    friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
     while friend_referral not in ('yes', 'no'):
         print("Please enter 'yes' or 'no'.")
-        friend_referral = input(
-            "Was the client referred by a friend? (yes/no): "
-        ).strip().lower()
+        friend_referral = input("Was the client referred by a friend? (yes/no): ").strip().lower()
 
     starting_loyalty_points = 10 if friend_referral == 'yes' else 0
 
+    # Add new client to 'clients' worksheet
     clients = SHEET.worksheet('clients')
     visits = SHEET.worksheet('visits')
     clients.append_row(new_client)
     print("New client created. Client ID:", new_client_id)
-    visits.append_row([
-        new_client_id, 0, starting_loyalty_points
-    ])
-    print(f"Added client ID {new_client_id} to visits sheet (0 visits - "
-          f"{starting_loyalty_points} loyalty points).")
+
+    # Add the client to the 'visits' sheet also
+    visits.append_row([new_client_id, 0, starting_loyalty_points])
+    print(f"Added client ID {new_client_id} to visits sheet (0 visits - {starting_loyalty_points} loyalty points).")
+
 
 
 def log_client_visit():
