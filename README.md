@@ -30,14 +30,14 @@ The client operates a barbershop in a busy city center and seeks a loyalty syste
 
 ### User Requirements
 
-1. **As a Staff Member**, I wnat to easily access the system, type the client's name, and find their details with minimal clicks.
-2. **As the Barber Shop Owner**, I want to View client visit frequency to understand repeat trade.
-3. **As the Barber Shop Owner**, I wans to add login details for new staff members.
-4. **SAs a staff member**, I want the system to provide clear client details as a prompt without relying on memory.
+1. **As a Staff Member**, I want to easily access the system, type the client's name, and find their details with minimal clicks.
+2. **As the Barber Shop Owner**, I want to view client visit frequency to understand repeat trade.
+3. **As the Barber Shop Owner**, I want to add login details for new staff members.
+4. **SAs a staff member**, I want the system to provide clear client details as a prompt without me relying on my own memory.
 
 ## System Data Flow Chart
 
-The flow chart visually illustrates the sequence of steps and decisions a user experiences, along with the data paths involved. It maps out how users interact with the system and how data moves through different stages of the process.
+The flow chart visually illustrates the sequence of steps and decisions a user experiences, along with the True/Flase paths involved. It maps out how users interact with the system and how data moves through different stages of the process.
 
 ![Code Flow Chart Screengrab](assets/images/barber_flow_chart.png)
 Created on [Canva](https://www.canva.com/)
@@ -49,7 +49,7 @@ Created on [Canva](https://www.canva.com/)
 - **Client Management**: Store and manage client information.
 - **Visit Tracking**: Track the number of visits each client makes.
 - **Loyalty Points System**: Award and manage loyalty points.
-- **Personalized Rewards**: Offer rewards like free shaves to loyal clients.
+- **Personalized Rewards**: Offer rewards (free shaves) to loyal clients.
 - **Title Banner**: A graphic banner at the top of the system frames the application, providing structure and visual appeal.
 > ![Title Banner Screengrab](assets/images/barber_title.png)
 - **Login Section**: A secure login page where staff members enter their username and password to access the system.
