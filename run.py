@@ -288,10 +288,8 @@ def add_new_client():
 
     clients = SHEET.worksheet('clients')
     visits = SHEET.worksheet('visits')
-
     clients.append_row(new_client)
     print("New client created. Client ID:", new_client_id)
-
     visits.append_row([
         new_client_id, 0, starting_loyalty_points
     ])
