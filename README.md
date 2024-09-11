@@ -31,30 +31,101 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 Happy coding!
 
-Click here[https://barber-brain-7aba89f189d5.herokuapp.com/] to view the live site 
-
-![barber_title.png](https://github.com/AlexBishopCode/Barber-Brain/blob/main/assets/images/barber_title.png)
-
+#### Click [here](https://barber-brain-7aba89f189d5.herokuapp.com/) to view the live site.
+#### (Utilise username 'jbloggs1' password '121212', client 'joe' 'bloggs' and client ID '1' as an example. Explore the google spreadsheet screenshots below to test the functions)
 
 # Barber Brain
+
+![Title Banner Screengrab](assets/images/barber_title.png)
 
 ## Introduction
 
 Barber Brain is a comprehensive loyalty management system designed specifically for barbershops. It helps manage client data, track visits, and award loyalty points to enhance customer engagement and retention. The system allows barbershops to offer personalized rewards, such as free shaves, to their most loyal clients, thus improving customer satisfaction and encouraging repeat visits.
 
-![barber_flow_chart.pdf](https://github.com/AlexBishopCode/Barber-Brain/blob/main/assets/images/barber_flow_chart.png)
+### The Client
+
+The client operates a barbershop in a busy city center and seeks a loyalty system to enhance customer engagement and boost repeat business. The new system should efficiently manage the existing loyalty scheme, where clients earn a free shave after ten visits. It must be accessible to all staff, providing them with clients' loyalty and personal information to improve the customer experience.
+
+### User Stories
+
+1. As a staff member, I want to be able to easily access the system and to easily type the clients name in and discover their details in as fewer clicks as possible.
+2. As the barber shop owner, I want to see how many times clients are visiting to understand how much repeat trade is occuring.
+3. As the barber shop owner, I want to be able to add login details for new staff members.
+3. As a staff member I want the system to provide clear details about each client as a prompt without me having to remmeber.
+
+
+### System Data Flow Chart
+
+The flow chart visually illustrates the sequence of steps and decisions a user experiences, along with the data paths involved. The chart maps out how users interact with the system and how data moves through different stages of the process.
+
+![Code Flow Chart Screengrab](assets/images/barber_flow_chart.png)
 
 ## Features
+
+### Existing Features
+
+#### TITLE
 
 - **Client Management**: Store and manage client information.
 - **Visit Tracking**: Track the number of visits each client makes.
 - **Loyalty Points System**: Award and manage loyalty points.
 - **Personalized Rewards**: Offer rewards like free shaves to loyal clients.
 
+#### Title banner
+- A graphic banner is present at the top of the system to frame the application and provide structure and visual appeal, improving user experience.
+
+![Title Banner Screengrab](assets/images/barber_title)
+
+#### login section
+- A secure login page where staff members enter their username and password to access the system.
+
+![Login Screengrab](assets/images/barber_login.png)
+
+#### Navigation menu 
+- A menu that lets staff navigate between searching for clients, adding new clients, logging visits, and logging out.
+
+![Title Banner Screengrab](assets/images/
+
+#### Search for a client feature
+- A search feature where staff can look up clients by first and last name to view their loyalty details and personal information.
+- Displays the client's personal information, such as name, pronouns, phone number, and email, along with their visit count and loyalty points.
+
+![Title Banner Screengrab](assets/images/
+
+#### Add a new client feature
+- A form for adding new clients, allowing staff to enter details like name, contact info, and whether they were referred by a friend.
+
+![Title Banner Screengrab](assets/images/
+
+#### Log a client visit feature
+- An option to record a client's visit, which updates their visit count and loyalty points and checks if they qualify for a free shave.
+
+![Title Banner Screengrab](assets/images/
+
+#### Loyalty points management feature
+- Manages client loyalty points, including a prompt to redeem points for a free shave if they have earned enough.
+
+![Title Banner Screengrab](assets/images/
+
+#### Error Handling and Validation: 
+- Error messages and checks to make sure all entered information, like emails and phone numbers, is correct.
+
+![Title Banner Screengrab](assets/images/
+
+#### Logout feature
+- A straightforward button for staff to log out of the system securely.
+
+#### Future Features
+- A feature where the managers log in details allows them to add a new member of staff onto the system.
+- A feature where staff are able to change their own password for the page.
+- A feature where the password is able to be hidden throughout the entire process.
+- A feature where customers are also able to log onto the system to see how many loyalty points they have.
+- A feature where an automatic email or text message is sent to the client once they have reached 10 loyalty points.
+
 ## Technologies Used
 
-- **Python**: Core programming language.
-- **Google Sheets API**: For managing and storing data.
+- **Python**: The core programming language used.
+- **Google Sheets API**: For managing and storing data on spreadsheets.
 - **gspread**: Python library for interacting with Google Sheets.
 - **Regular Expressions (re)**: For input validation.
 
@@ -71,11 +142,11 @@ To install and run the Barber Brain application, follow these steps:
 
 # Linter 
 
-![assets/images/barber_linter_screenshot.png]
+![Linter Validation Screengrab](assets/images/barber_linter_screenshot.png)
 
 # In-Line Command Code Testing
 
-![assets/images/barber_testing_worksheet.png]
+![Testing Worksheet Screengrab](assets/images/barber_testing_worksheet.png)
 ## Development
 
 - GITPOD - The online IDE was used for writing and testing the code in a cloud-based environment.
@@ -118,3 +189,13 @@ The Pyton and Nosejs buildpacks were added to the configuration.
 
 #Contact
 For any questions or further information, please contact Alex at helloalexbishop@gmail.com
+
+
+## Index – Table of Contents
+* [User Experience (UX)](#user-experience-ux) 
+* [Features](#features)
+* [Design](#design)
+* [Technologies Used](#technologies-used)
+* [Testing](#testing)
+* [Deployment](#deployment)
+* [Credits](#credits)
