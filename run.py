@@ -62,6 +62,8 @@ def validate_input(prompt, validation_function, error_message):
         print(error_message)
 
 def is_valid_name(value):
+    # re.match checks if the input matches pattern (left)
+    # and bool() covernts into True or False
     return bool(re.match(r"^[A-Za-z\s]+$", value))
 
 def is_valid_phone(value):
