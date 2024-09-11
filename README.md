@@ -71,13 +71,11 @@ To install and run the Barber Brain application, follow these steps:
 
 # Linter 
 
-![barber_linter_screenshot.png](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_brain_test_table.pdf)
+![assets/images/barber_linter_screenshot.png]
 
 # In-Line Command Code Testing
 
-![barber_testing_worksheet.png](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_testing_worksheet.png)
-
-
+![assets/images/barber_testing_worksheet.png]
 ## Development
 
 - GITPOD - The online IDE was used for writing and testing the code in a cloud-based environment.
