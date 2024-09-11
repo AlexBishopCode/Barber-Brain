@@ -40,7 +40,7 @@ Happy coding!
 
 Barber Brain is a comprehensive loyalty management system designed specifically for barbershops. It helps manage client data, track visits, and award loyalty points to enhance customer engagement and retention. The system allows barbershops to offer personalized rewards, such as free shaves, to their most loyal clients, thus improving customer satisfaction and encouraging repeat visits.
 
-[barber_flow_chart.pdf](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_flow_chart.pdf)
+![barber_flow_chart.pdf](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_flow_chart.pdf)
 
 ## Features
 
@@ -69,7 +69,7 @@ To install and run the Barber Brain application, follow these steps:
 
 #In-Line Command Code Testing
 
-[barber_brain_test_table.pdf](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_brain_test_table.pdf)
+![barber_brain_test_table.pdf](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_brain_test_table.pdf)
 
 ## Development
 
