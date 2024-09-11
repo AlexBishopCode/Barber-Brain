@@ -13,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('barber_brain')
 
+
 def fetch_all_data():
     global staff_members, client_data, visits_data, headers, visits
     staff_members = SHEET.worksheet('staff').get_all_values()
@@ -23,7 +24,9 @@ def fetch_all_data():
     headers = client_data[0]
     client_data = client_data[1:]
 
+
 fetch_all_data()
+
 
 def print_title():
     title = """
@@ -36,13 +39,15 @@ def print_title():
     """
     print(title)
 
+
 def check_input_valid(input_value, validation_type):
-    
+
     patterns = {
         'phone': r"^(?:\+44|0)\d{10}$",
         'email': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     }
     return re.match(patterns[validation_type], input_value) is not None
+
 
 def login():
     while True:
@@ -55,15 +60,16 @@ def login():
             sheet_username = row[1]
             sheet_password = row[2]
 
-            if staff_username == sheet_username and staff_password == sheet_password:
+            if (staff_username, staff_password) == (sheet_username, sheet_password):
                 print("\nLogin successful!")
                 return True
-        
-        print ("\nInvalid username or password.")
+        print("\nInvalid username or password.")
+
 
 def logout():
     print("\nYou have been logged out.")
     return False
+
 
 def main():
     print_title()
@@ -77,9 +83,13 @@ def main():
             print("Login failed. Exiting program.")
             break
 
+
 def search_client():
     while True:
-        first_name = input("Enter the client's first name (or type 'exit' to quit): ").strip().capitalize()
+        first_name = (
+            input("Enter the client's first name (or type 'exit' to quit): ")
+            .strip().capitalize()
+            )
 
         if first_name.lower() == 'exit':
             print("Exiting the search.")
@@ -90,7 +100,7 @@ def search_client():
             continue
 
         while True:
-            second_name = input("Enter the client's second name (or type 'exit' to quit): ").strip().capitalize()
+            second_name = input("Enter the client's second name (or type 'exit' to quit):").strip().capitalize()
 
             if second_name.lower() == 'exit':
                 print("Exiting the search.")
@@ -136,13 +146,13 @@ def search_client():
                                 print("Loyalty points not redeemed.")
                         else:
                             print("This client is not eligible for a free shave yet.")
-                        
                         found = True
                         break
                 break
 
         if not found:
             print("No details found for that name.")
+
 
 def add_new_client():
     new_client = []
@@ -157,8 +167,7 @@ def add_new_client():
     else:
         new_client_id = 1
 
-    
-    for header in headers: 
+    for header in headers:
         if header.lower() == 'first name' or header.lower() == 'surname':
             while True:
                 value = input(f"Enter {header}: ").strip()
@@ -202,13 +211,14 @@ def add_new_client():
     starting_loyalty_points = 10 if friend_referral == 'yes' else 0
 
     clients = SHEET.worksheet('clients')
-    visits = SHEET.worksheet('visits')  
+    visits = SHEET.worksheet('visits')
 
     clients.append_row(new_client)
     print("New client created. Client ID:", new_client_id)
 
     visits.append_row([new_client_id, 0, starting_loyalty_points])
     print(f"Added client ID {new_client_id} to visits sheet (0 visits - {starting_loyalty_points} loyalty points).")
+
 
 def log_client_visit():
     global visits
@@ -225,7 +235,7 @@ def log_client_visit():
 
             current_points = int(row[2])
             new_points = current_points + 1
-            visits.update_cell(i, 3, new_points) 
+            visits.update_cell(i, 3, new_points)
 
             print(f"Client visits updated to {new_visits}.")
             print(f"Loyalty points updated to {new_points}.")
@@ -255,6 +265,7 @@ def log_client_visit():
     if not client_found:
         print("Client ID could not be found.")
 
+
 def navigation_menu():
     
     while True:
@@ -276,6 +287,7 @@ def navigation_menu():
             return logout()
         else:
             print("Invalid choice. Enter option (1/2/3/4).")
+
 
 if __name__ == "__main__":
     main()
