@@ -93,9 +93,14 @@ def login():
             sheet_username = row[1]
             sheet_password = row[2]
 
-            if (staff_username, staff_password) == (sheet_username, sheet_password):
+            credentials_match = (
+                (staff_username == sheet_username) and
+                (staff_password == sheet_password)
+            )
+            if credentials_match:
                 print("\nLogin successful!")
                 return True
+
         print("\nInvalid username or password.")
 
 
@@ -144,7 +149,10 @@ def search_client():
 
         found = False
         for row in client_data:
-            if (first_name == row[0].capitalize() and second_name == row[1].capitalize()):
+            first_name_match = (first_name == row[0].capitalize())
+            second_name_match = (second_name == row[1].capitalize())
+
+            if first_name_match and second_name_match:
                 client_id = row[2]
                 print("\nDetails found:")
                 for i in range(len(headers)):
@@ -168,19 +176,22 @@ def search_client():
                                 print("Please enter 'yes' or 'no'.")
                                 redeem = input(
                                     "Would the client like to redeem 10 "
-                                    "loyalty points for a free shave? (yes/no): "
+                                    "loyalty points for a free shave? "
+                                    "(yes/no): "
                                 ).strip().lower()
                             if redeem == 'yes':
                                 new_points = loyalty_points - 10
                                 visits.update_cell(
-                                    visits_data.index(visit_row) + 1, 3, new_points
+                                    visits_data.index(visit_row) + 1, 3,
+                                    new_points
                                 )
                                 print("*Points redeemed* Client has used 10 "
                                       "loyalty points for a free shave.")
                             else:
                                 print("Loyalty points not redeemed.")
                         else:
-                            print("This client is not eligible for a free shave yet.")
+                            print("This client is not eligible "
+                                  "for a free shave yet.")
                         found = True
                         break
                 break
@@ -205,7 +216,12 @@ def add_new_client():
         current_client_ids = [
             int(row[2]) for row in client_data if row[2].isdigit()
         ]
-        new_client_id = (max(current_client_ids) + 1) if current_client_ids else 1
+
+        if current_client_ids:
+            max_id = max(current_client_ids)
+            new_client_id = max_id + 1
+        else:
+            new_client_id = 1
     else:
         new_client_id = 1
 
@@ -226,7 +242,8 @@ def add_new_client():
                     new_client.append(value)
                     break
                 else:
-                    print(f"{header} must only contain letters, spaces, or slashes, "
+                    print(f"{header} must only contain letters, "
+                          "spaces, or slashes, "
                           "and must include one slash to separate pronouns.")
         elif header.lower() == 'phone number':
             while True:
@@ -244,7 +261,8 @@ def add_new_client():
                     new_client.append(email)
                     break
                 else:
-                    print("Invalid email address. Please enter a valid email address.")
+                    print("Invalid email address. "
+                          "Please enter a valid email address.")
         elif header.lower() != 'client id':
             while True:
                 value = input(f"Enter {header}: ").strip()
@@ -252,7 +270,8 @@ def add_new_client():
                     new_client.append(value)
                     break
                 else:
-                    print(f"{header} must only contain letters and spaces and cannot be empty.")
+                    print(f"{header} must only contain letters "
+                          "and spaces and cannot be empty.")
 
     new_client.insert(2, new_client_id)
 
@@ -312,7 +331,8 @@ def log_client_visit():
                 while redeem not in ('yes', 'no'):
                     print("Please enter 'yes' or 'no'.")
                     redeem = input(
-                        "Would the client like to redeem 10 loyalty points for a "
+                        "Would the client like to redeem "
+                        "10 loyalty points for a "
                         "free shave? (yes/no): "
                     ).strip().lower()
                 if redeem == 'yes':

@@ -31,6 +31,8 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 Happy coding!
 
+Click here[https://barber-brain-7aba89f189d5.herokuapp.com/] to view the live site 
+
 ![barber_title.png](https://github.com/AlexBishopCode/Barber-Brain/blob/main/barber_title.png)
 
 
