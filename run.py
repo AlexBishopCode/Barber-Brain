@@ -23,11 +23,13 @@ def fetch_all_data():
     'visits' worksheets on Google Sheets.
     """
     global staff_members, client_data, visits_data, headers, visits
+    # retreive worksheet data
     staff_members = SHEET.worksheet('staff').get_all_values()
     client_data = SHEET.worksheet('clients').get_all_values()
     visits_data = SHEET.worksheet('visits').get_all_values()
     visits = SHEET.worksheet('visits')
 
+    # retrieve headers and the client data
     headers = client_data[0]
     client_data = client_data[1:]
 
@@ -85,10 +87,14 @@ def login():
     """
     while True:
         print("Barber Brain Staff Login")
-
+        """
+        [SOURCE CODE FOR strip() and lower() code
+        https://stackoverflow.com/questions/54884992/python-apply-lower-strip-and-split-in-one-line
+        """
         staff_username = input("Username: ").strip()
         staff_password = input("Password: ").strip()
 
+        # Checking credentials against worksheet
         for row in staff_members[1:]:
             sheet_username = row[1]
             sheet_password = row[2]
@@ -148,6 +154,7 @@ def search_client():
             break
 
         found = False
+        # Search for client data matching names
         for row in client_data:
             first_name_match = (first_name == row[0].capitalize())
             second_name_match = (second_name == row[1].capitalize())
@@ -181,6 +188,7 @@ def search_client():
                                 ).strip().lower()
                             if redeem == 'yes':
                                 new_points = loyalty_points - 10
+                                # Updates the loyalty points
                                 visits.update_cell(
                                     visits_data.index(visit_row) + 1, 3,
                                     new_points
@@ -211,7 +219,7 @@ def add_new_client():
 
     global client_data, headers
     fetch_all_data()
-
+    # Determine value of next client ID
     if client_data:
         current_client_ids = [
             int(row[2]) for row in client_data if row[2].isdigit()
@@ -224,7 +232,7 @@ def add_new_client():
             new_client_id = 1
     else:
         new_client_id = 1
-
+    # Retrieve client details from headers
     for header in headers:
         if header.lower() == 'first name' or header.lower() == 'surname':
             while True:
@@ -272,9 +280,9 @@ def add_new_client():
                 else:
                     print(f"{header} must only contain letters "
                           "and spaces and cannot be empty.")
-
+    # Inputs new client ID at the start
     new_client.insert(2, new_client_id)
-
+    # Check if client if from a friends referral
     friend_referral = input(
         "Was the client referred by a friend? (yes/no): "
     ).strip().lower()
