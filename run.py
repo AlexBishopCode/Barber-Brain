@@ -60,6 +60,19 @@ def check_input_valid(input_value, validation_type):
     }
     return re.match(patterns[validation_type], input_value) is not None
 
+def is_letters_only(input_value, forward_slash=False):
+    """
+    Checks if input value contains only letters and spaces.
+    """
+    return re.match(r"^[A-Za-z\s]+$", input_value) is not None
+
+def is_pronouns(input_value):
+    """
+    Checks if input contains only letters, spaces, and forward slashes.
+    Requires one forward slash to separate pronouns.
+    """
+    return re.match(r"^[A-Za-z\s/]+/[A-Za-z\s/]+$", input_value) is not None
+
 
 def login():
     """
@@ -189,11 +202,19 @@ def add_new_client():
         if header.lower() == 'first name' or header.lower() == 'surname':
             while True:
                 value = input(f"Enter {header}: ").strip()
-                if value:
+                if value and is_letters_only(value):
                     new_client.append(value.capitalize())
                     break
                 else:
-                    print(f"{header} cannot be empty.")
+                    print(f"{header} must only contain letters and spaces and cannot be empty.")
+        elif header.lower() == 'pronouns':
+            while True:
+                value = input(f"Enter {header}: ").strip()
+                if value and is_pronouns(value):
+                    new_client.append(value)
+                    break
+                else:
+                    print(f"{header} must only contain letters, spaces, or slashes, and must include one slash to separate pronouns.")
         elif header.lower() == 'phone number':
             while True:
                 phone_number = input(f"Enter {header}: ").strip()
@@ -213,11 +234,11 @@ def add_new_client():
         elif header.lower() != 'client id':
             while True:
                 value = input(f"Enter {header}: ").strip()
-                if value:
+                if value and is_letters_only(value):
                     new_client.append(value)
                     break
                 else:
-                    print(f"{header} cannot be empty.")
+                    print(f"{header} must only contain letters and spaces and cannot be empty.")
 
     new_client.insert(2, new_client_id)
 
