@@ -142,11 +142,25 @@ For any questions or further information, please contact Alex at helloalexbishop
 
 ## Credits 
 
->### Research
+[Complete Python Mastery and Python Projects for Beginners - Code With Mosh](https://codewithmosh.com/)
+> Utilsied heavily to build on the foundation knowledge set by the love-sandwiches tutorial and training content provided by CI.
 
->### Acknowledgements
+[Using Python 🐍 with Google Sheets as a database](https://steemit.com/utopian-io/@drookyn/using-python-with-google-sheets-as-a-database)
+> Utilised to help understand the main() and rows logic and inspired worksheet setup.
 
-[Canva](https://www.canva.com/) utilsied to create the flowchat within the README file.
+[RobustQA Abhishek Patel - AbhishRead and Write data from google sheets using Python](https://www.youtube.com/watch?v=hyUw-koO2DA)
+>Utilised for understanding how to manipulate data between google sheets and github.
+
+AI powered generator ['ChatGPT'](https://chatgpt.com/)
+> Utilised after the Linter to reduce some character lenghts down when unclear how to do so.
+
+[Python: apply lower() strip() and split() in one line](https://stackoverflow.com/questions/54884992/python-apply-lower-strip-and-split-in-one-line)
+> Utilised to understand how to apply lower() and strip()
+
+[Real Python - Using Python enumerate() With for Loops](https://www.youtube.com/watch?v=nI-jkrJxlz0)
+[Phyton.ord - Built-in Functions](https://docs.python.org/3/library/functions.html#enumerate)
+> Utilised to gain a better understanding of enumerate() 
+
 
 ## Google Sheets Information
 

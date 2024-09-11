@@ -307,6 +307,10 @@ def log_client_visit():
     fetch_all_data()
     client_found = False
 
+    """
+    [Source Material for enumerate research] = https://docs.python.org/3/library/functions.html#enumerate 
+    and https://www.youtube.com/watch?v=nI-jkrJxlz0)
+    """
     for i, row in enumerate(visits_data[1:], start=2):
         if row[0] == client_id:
             current_visits = int(row[1])
