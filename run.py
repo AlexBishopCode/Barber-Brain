@@ -64,7 +64,7 @@ def check_input_valid(input_value, validation_type):
     return re.match(patterns[validation_type], input_value) is not None
 
 
-def is_letters_only(input_value, forward_slash=False):
+def is_letters_only(input_value):
     """
     Checks if input value contains only letters and spaces.
     """
