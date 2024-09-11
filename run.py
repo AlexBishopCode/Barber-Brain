@@ -2,12 +2,14 @@ import gspread
 from google.oauth2.service_account import Credentials
 import re
 
+# Defines the scope for Google Sheets access
 SCOPE = {
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 }
 
+# Validate and initialise the Google sheets client
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -15,6 +17,9 @@ SHEET = GSPREAD_CLIENT.open('barber_brain')
 
 
 def fetch_all_data():
+    """
+    Retrieves and stores all data from the 'staff', 'clients', and 'visits' worksheets on Google sheets.
+    """
     global staff_members, client_data, visits_data, headers, visits
     staff_members = SHEET.worksheet('staff').get_all_values()
     client_data = SHEET.worksheet('clients').get_all_values()
@@ -29,6 +34,9 @@ fetch_all_data()
 
 
 def print_title():
+    """
+    Prints the title header for the project
+    """
     title = """
     ##################################################################
     #                                                                #
@@ -41,6 +49,9 @@ def print_title():
 
 
 def check_input_valid(input_value, validation_type):
+    """
+    Validates input data for phone numbers and emails
+    """
 
     patterns = {
         'phone': r"^(?:\+44|0)\d{10}$",
@@ -50,6 +61,11 @@ def check_input_valid(input_value, validation_type):
 
 
 def login():
+    """
+    Handles user login for staff
+    Prompts the user to enter a username and login and checks
+    against credentials within the 'staff' google worksheet.
+    """
     while True:
         print("Barber Brain Staff Login")
 
@@ -67,11 +83,19 @@ def login():
 
 
 def logout():
+    """
+    Exits the users space and returns the user to the login function
+    """
     print("\nYou have been logged out.")
     return False
 
 
 def main():
+    """
+    Function which runs the application.
+
+    Prints title, presents login and handles the navigation elements within the systems menu.
+    """
     print_title()
 
     while True:
@@ -85,6 +109,12 @@ def main():
 
 
 def search_client():
+    """
+    Function which searches for an existing client based on first name and second name
+    credentials within the 'client' worksheet.
+
+    If found, the clients detailed are displayed.
+    """
     while True:
         first_name = (
             input("Enter the client's first name (or type 'exit' to quit): ")
@@ -155,6 +185,11 @@ def search_client():
 
 
 def add_new_client():
+    """
+    Function that adds a new client to the system, asking
+    for various details to be inputted. If the client is referred 
+    by a friend they are awarded 10 loyalty points.
+    """
     new_client = []
     print("Enter the new client's details: ")
 
